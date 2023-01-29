@@ -5,16 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
     <title>5 Day FORECAST</title>
 </head>
 <body>
     <div class="wrapper">
         <div class="sidebar">
-            <div>>
+            <div>
                 <form action="" class="search"  id="search" >
                     <input type="text" id="query" placeholder="Search...">
-                    <button>Search</button> 
+                    <button>
+                        <i class="fas fa-search"></i>
+                    </button> 
                 </form>
+                <div class="weather-icon">
+                    <img src="/Images/weather-icon.png" alt="" id="icon">
+                </div>
+                <div class="climate">
+                    <h1 id="temp"> 0</h1>
+                    <span class="temp-unit">°F</span>
+                </div>
+                <div class="date-time">
+                    <p id="date-time">
+                        Monday, 12:00   
+                    </p>
+                </div>
+                <div class="divider"></div>
             </div>
         </div>
     </div>
