@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;6006display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 
 :root {
     --primary-color: #8B3F9E;
@@ -250,4 +250,12 @@ nav .options-degrees button {
     margin-top: 20px;
     text-align: left;
 }
-
+.credits {
+    text-align: center;
+    font-size: 15px;
+    color: green;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%)
+}
