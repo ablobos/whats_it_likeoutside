@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;6006display=swap");
 
 :root {
     --primary-color: #8B3F9E;
@@ -80,7 +80,7 @@ img {
 }
 
 .weather-icon {
-    width: 100%;
+    width: 80%;
     height: 15px;
     text-align: center;
     margin-top: 20px;
@@ -130,7 +130,7 @@ img {
     width: 20px;
 }
 .location {
-    display; flex;
+    display: flex;
     align-itmes: center;
     font-size: 14px;
     gap: 10px;
