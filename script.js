@@ -1,7 +1,7 @@
 const temp = document.getElementById("temp"),
     date = document.getElementById("date-time"),
     currentLocation = document.getElementById("location"),
-    condition = document.getElementById("conditions"),
+    condition = document.getElementById("condition"),
     rain = document.getElementById("rain"),
     mainIcon = document.getElementById("icon"),
     uvIndex = document.querySelector(".uv-index"),
@@ -50,7 +50,7 @@ function getDateTime() {
                 hour = "0" + hour;
             } 
             if (minute < 10) {
-                minute = "0" + hour;
+                minute = "0" + minute;
             }
 
             let dayString = days[now.getDay()];
@@ -112,6 +112,7 @@ function getWeatherData(city, unit, hourlyWeekly) {
                 sunRise.innerText = convertTimeTo12HourFormat(today.sunrise);
                 sunSet.innerText =  convertTimeTo12HourFormat(today.sunset);
                 mainIcon.src = getIcon(today.icon);
+                changeBackground(today.icon);
                 if (hourlyWeekly === "hourly") {
                     updateForecast(data.days[0].hours, unit , "day");
                 }   else {
@@ -194,24 +195,24 @@ function convertTimeTo12HourFormat(time) {
        hour = hour & 12;
        hour = hour ? hour : 12; //0 hr ends up as 12
        hour = hour < 10 ? "0" + hour : hour; 
-       minute = minute < 10 ? "0"+ minute : minute;
-       let startTime = hour + ":" + minute + " " + ampm;
-       return startTime; 
+       minute = minute < 10 ? "0" + minute : minute;
+       let strTime = hour + ":" + minute + " " + ampm;
+       return strTime; 
 }
 
 function getIcon(condition) {
-    if (condition ===   "partly-cloudy-day") {
-        return "Images/sun.cloud.png";
+    if (condition ===   "Partly-cloudy-day") {
+        return "Images/partly-cloudy.jpg";
     } else if (condition === "partly-cloudy-night") {
         return "Images/cloudy.png";
     } else if (condition === "rain") {
-        return "Images/rain.png";
+        return "Images/rainy-day.jpg";
     } else if (condition === "clear-day") {
-        return "Images/cloud-rain-icon";
+        return "Images/clear-sky.jpg";
     } else if (condition == "clear-night") {
-        return "Images/clearlikenight.png";
+        return "Images/clear-night.png";
     } else {
-        return "Images/weather-icon.png";
+        return "Images/good-question.jpg";
     }
 }
 
@@ -250,7 +251,7 @@ function updateForecast (data, unit, type) {
     }   else {
         numCards = 7;
     }
-    for (let i = 0; i < numCards; i++){
+    for (let i = 0; i < numCards; i++) {
         let card = document.createElement("div");
         card.classList.add("card");
 
@@ -261,9 +262,9 @@ function updateForecast (data, unit, type) {
             }
             let dayTemp = data[day].temp;
             if (unit === "f") {
-                dayTemp = celsiusToFahrenheit(date[day].temp);
+             dayTemp = celsiusToFahrenheit(data[day].temp);
             }
-            let iconCondition = data[day].temp;
+            let iconCondition = data[day].icon;
             let iconSrc = getIcon(iconCondition);
             let tempUnit = "°C";
             if (unit === "f") {
@@ -288,18 +289,18 @@ function updateForecast (data, unit, type) {
 function changeBackground(condition) {
     const body = document.querySelector("body");
     let bg = "";
-        if (condition ===   "partly-cloudy-day") {
-            return "Images/sun.cloud.png";
+        if (condition === "partly-cloudy-day") {
+            bg = "Images/sun.cloud.png";
         } else if (condition === "partly-cloudy-night") {
-            return "Images/cloudy.png";
+            bg = "Images/cloudy.png";
         } else if (condition === "rain") {
-            return "Images/rain.png";
+            bg = "Images/rain.png";
         } else if (condition === "clear-day") {
-            return "Images/cloud-rain-icon";
+            bg = "Images/clear-sky.jpg";
         } else if (condition == "clear-night") {
-            return "Images/clearlikenight.png";
+            bg = "Images/clear-night.png";
         } else {
-            return "Images/weather-icon.png";
+            bg = "Images/weather-icon.png";
         }
         body.style.backgroundImage = `url(${bg})`;
 }
