@@ -29,5 +29,6 @@ Deploy Page: https://ablobos.github.io/whats_it_likeoutside/
 Select the deploy page and attempt your searches. For best results, search metropoiltan cities. 
 Note: Typing the State may not always be necessary.
 ## Screenshot
+![image](https://user-images.githubusercontent.com/117130907/216798445-969a0eec-bb18-421d-9fb9-34b4dcfc30fd.png)
 ## License
 Licensing in repo.
