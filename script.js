@@ -26,7 +26,7 @@ const temp = document.getElementById("temp"),
 
 let currentCity = "";
 let currentUnit = "c";
-let hourlyWeekly = "Week";
+let hourlyWeek = "Week";
 
 //updating 
 
@@ -74,14 +74,14 @@ function getPublicIp() {
         .then((data) => {
             console.log(data);
             currentCity = data.city;
-            //getWeatherData(data.city , currentUnit , hourlyWeekly);
+            //getWeatherData(data.city , currentUnit , hourlyWeek);
         });
     }
     getPublicIp();
 
 //function for weather data
 
-function getWeatherData(city, unit, hourlyWeekly) {
+function getWeatherData(city, unit, hourlyWeek) {
     console.log(city);
     const apiKey = "N5T5LN5MK2QZN7LWV3WZPCR59";
     fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=metric&key=${apiKey}&contentType=json`, 
@@ -99,7 +99,7 @@ function getWeatherData(city, unit, hourlyWeekly) {
                 }
                 currentLocation.innerText = data.resolvedAddress;
                 condition.innerText = today.conditions;
-                rain.innerText = "Precipitation - 0%" + today.precipitation + "%";
+                //rain.innerText = "Precipitation - 0%" + today.precipitation + "%";
                 uvIndex.innerText = today.uvindex;
                 windSpeed.innerText = today.windspeed;
                 humidity.innerText = today.humidity + "%";
@@ -113,7 +113,7 @@ function getWeatherData(city, unit, hourlyWeekly) {
                 sunSet.innerText =  convertTimeTo12HourFormat(today.sunset);
                 mainIcon.src = getIcon(today.icon);
                 changeBackground(today.icon);
-                if (hourlyWeekly === "hourly") {
+                if (hourlyWeek === "hourly") {
                     updateForecast(data.days[0].hours, unit , "day");
                 }   else {
                     updateForecast(data.days, unit , "week");
@@ -196,13 +196,13 @@ function convertTimeTo12HourFormat(time) {
        hour = hour ? hour : 12; //0 hr ends up as 12
        hour = hour < 10 ? "0" + hour : hour; 
        minute = minute < 10 ? "0" + minute : minute;
-       let strTime = hour + ":" + minute + " " + ampm;
+       let strTime = hour + ":" + minute + ampm;
        return strTime; 
 }
 
 function getIcon(condition) {
     if (condition ===   "Partly-cloudy-day") {
-        return "Images/partly-cloudy.jpg";
+        return "Images/cloudy.png";
     } else if (condition === "partly-cloudy-night") {
         return "Images/cloudy.png";
     } else if (condition === "rain") {
@@ -212,7 +212,7 @@ function getIcon(condition) {
     } else if (condition == "clear-night") {
         return "Images/clear-night.png";
     } else {
-        return "Images/good-question.jpg";
+        return "Images/cloudy.png";
     }
 }
 
@@ -229,10 +229,10 @@ function getDayName(date) {
     ];
     return days[day.getDay()];
 }
-function getHour (time) {
+function getHour(time) {
     let hour = time.split(":")[0];
     let min = time.split(":")[1];
-    if (hour < 12) {
+    if (hour > 12) {
         hour = hour - 12;
         return `${hour}:${min} PM`;
     } else {
@@ -290,17 +290,17 @@ function changeBackground(condition) {
     const body = document.querySelector("body");
     let bg = "";
         if (condition === "partly-cloudy-day") {
-            bg = "Images/sun.cloud.png";
+            bg = "Images/partly-cloudy.jpg";
         } else if (condition === "partly-cloudy-night") {
-            bg = "Images/cloudy.png";
+            bg = "Images/clear-sky.jpg";
         } else if (condition === "rain") {
-            bg = "Images/rain.png";
+            bg = "Images/rainy-day.jpg";
         } else if (condition === "clear-day") {
             bg = "Images/clear-sky.jpg";
         } else if (condition == "clear-night") {
-            bg = "Images/clear-night.png";
+            bg = "Images/clear-night-sky.jpg";
         } else {
-            bg = "Images/weather-icon.png";
+            bg = "Images/good-question1.jpg";
         }
         body.style.backgroundImage = `url(${bg})`;
 }
@@ -329,7 +329,7 @@ function changeUnit(unit) {
                 fahrenheitBtn.classList.add("active");
             }
             //weather fetching after changing the unit
-            getWeatherData(currentCity, currentUnit, hourlyWeekly);
+            getWeatherData(currentCity, currentUnit, hourlyWeek);
         }
     }
   }
@@ -343,8 +343,8 @@ hourlyBtn.addEventListener("click", () => {
   });
 
    function changeTimeSpan(unit) {
-    if (hourlyWeekly !== unit) {
-        hourlyWeekly = unit;
+    if (hourlyWeek !== unit) {
+        hourlyWeek = unit;
         if (unit === "hourly") {
             hourlyBtn.classList.add("active");
             weekBtn.classList.add("active");
@@ -352,7 +352,7 @@ hourlyBtn.addEventListener("click", () => {
             hourlyBtn.classList.remove("active");
             weekBtn.classList.add("active");
         }
-        getWeatherData(currentCity, currentUnit, hourlyWeekly);
+        getWeatherData(currentCity, currentUnit, hourlyWeek);
         }
     }
    
@@ -361,7 +361,7 @@ hourlyBtn.addEventListener("click", () => {
         let location = search.value;
         if (location) {
             currentCity = location;
-            getWeatherData(currentCity, currentUnit, hourlyWeekly);
+            getWeatherData(currentCity, currentUnit, hourlyWeek);
         }
     });
   //getWeatherData("Boston", "c" , "hourlyWeekly")
