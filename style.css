@@ -18,7 +18,7 @@ body {
     min-width: 100px;
     padding: 50px;
     background: var(--primary-color);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("..Images/skyback.jpg");
+    background-image: url("././Images/skyback.jpg");
     background-size: cover;
     background-position: center;
  
